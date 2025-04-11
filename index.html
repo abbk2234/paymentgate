@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.rtl.min.css" integrity="sha384-q8+l9TmX3RaSz3HKGBmqP2u5MkgeN7HrfOJBLcTgZsQsbrx8WqqxdA5PuwUV9WIx" crossorigin="anonymous">    <title>Edit page</title>
+  </head>
+  <body>
+    <header class="bg-primary p-5 mb-5 rounded-bottom-5">
+      <div class="row justify-content-strat">
+        <div class="col-7 text-white"><h2>درگاه پرداخت</h2></div>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-7 bg-white text-primary rounded-pill"><p>این درگاه کاملا غیر واقعی میباشد . از درج کردن اطلاعات شخصی خودداری کنید</p></div>
+      </div>
+    </header>
+    <div class="p-5 bg-dark col-10 col-md-8 col-lg-6 mx-auto rounded-5">
+      <div class="row">
+        <div class="bg-body-secondary p-3 rounded-5 text-center d-flex flex-column justify-content-center gap-3">
+          <div class="row">
+            <div class="col-12">
+              <label for="card_num" class="form-label">شماره کارت</label>
+              <input type="text" class="form-control rounded-pill" id="card_num" placeholder="16 رقم وارد شود" />
+            </div>
+            <div class="col-6">
+              <label for="cvv2_num" class="form-label">شماره شناسایی دوم cvv2</label>
+              <input type="text" class="form-control rounded-pill" id="cvv2_num" placeholder="" />
+            </div>
+            <div class="col-6">
+              <div class="row flex-row flex-nowrap justify-content-evenly align-items-center">
+                <div class="col-6">
+                  <label for="mon_num" class="form-label">ماه</label>
+                  <input type="text" class="form-control rounded-pill" id="mon_num" placeholder="" />
+                </div>
+                <div class="col-6">
+                  <label for="year_num" class="form-label">سال</label>
+                  <input type="text" class="form-control rounded-pill" id="year_num" placeholder="" />
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="captcha" class="form-label">کد امنیتی</label>
+              <div class="input-group">
+                <input type="text" id="captcha" class="form-control rounded-start-pill" />
+                <input type="text" id="captcha-text" class="form-control bg-body-secondary" />
+                <button class="btn btn-outline-dark rounded-end-pill">reset</button>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="nd_pass_num" class="form-label">رمز دوم اینترنتی</label>
+              <input type="text" class="form-control rounded-pill" id="nd_pass_num" placeholder="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-3 input-group justify-content-center">
+        <button class="btn btn-outline-success rounded-start-pill" id="pay">پرداخت</button>
+        <button class="btn btn-outline-warning rounded-end-pill" id="dismiss">انصراف</button>
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>
