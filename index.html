@@ -1,65 +1,121 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>درگاه پرداخت</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.rtl.min.css">
-</head>
-<body class="bg-light">
-
-    <!-- هدر -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.rtl.min.css" />
+    <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.rtl.min.css" /> -->
+  </head>
+  <body class="bg-light">
     <header class="bg-primary text-white text-center py-4 mb-5 shadow-sm">
-        <h2>درگاه پرداخت</h2>
-        <p class="bg-white text-primary rounded-pill d-inline-block px-3 py-2 mt-2">این درگاه کاملا غیر واقعی می‌باشد. از درج اطلاعات شخصی خودداری کنید.</p>
+      <h2>درگاه پرداخت</h2>
+      <p class="bg-white text-primary rounded-pill d-inline-block px-3 py-2 mt-2">این درگاه کاملا غیر واقعی می‌باشد. از درج اطلاعات شخصی خودداری کنید.</p>
     </header>
 
-    <!-- فرم پرداخت -->
     <div class="container">
-        <div class="col-md-6 mx-auto bg-white p-4 rounded-4 shadow-lg">
-            <h4 class="text-center mb-3">اطلاعات پرداخت را وارد کنید</h4>
+      <div class="col-md-6 mx-auto bg-white p-4 rounded-4 shadow-lg">
+        <h4 class="text-center mb-3">اطلاعات پرداخت را وارد کنید</h4>
 
-            <form>
-                <div class="mb-3">
-                    <label for="card_num" class="form-label">شماره کارت</label>
-                    <input type="text" class="form-control border-primary rounded-pill" id="card_num" placeholder="16 رقم وارد شود">
-                </div>
+        <form>
+          <div class="mb-3">
+            <label for="card_num" class="form-label">شماره کارت</label>
+            <input type="text" class="form-control border-primary rounded-pill" id="card_num" placeholder="16 رقم وارد شود" />
+          </div>
 
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="cvv2_num" class="form-label">شماره شناسایی دوم (CVV2)</label>
-                        <input type="text" class="form-control border-primary rounded-pill" id="cvv2_num">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">تاریخ انقضا</label>
-                        <div class="d-flex gap-2">
-                            <input type="text" class="form-control border-primary rounded-pill" placeholder="ماه">
-                            <input type="text" class="form-control border-primary rounded-pill" placeholder="سال">
-                        </div>
-                    </div>
-                </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="cvv2_num" class="form-label">شماره شناسایی دوم (CVV2)</label>
+              <input type="text" class="form-control border-primary rounded-pill" id="cvv2_num" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">تاریخ انقضا</label>
+              <div class="d-flex gap-2">
+                <input type="text" id="month" class="form-control border-primary rounded-pill" placeholder="ماه" />
+                <input type="text" id="year" class="form-control border-primary rounded-pill" placeholder="سال" />
+              </div>
+            </div>
+          </div>
 
-                <div class="mb-3">
-                    <label for="captcha" class="form-label">کد امنیتی</label>
-                    <div class="input-group">
-                        <input type="text" id="captcha" class="form-control rounded-start-pill border-primary">
-                        <input type="text" id="captcha-text" class="form-control bg-light text-center border-primary">
-                        <button class="btn btn-outline-dark rounded-end-pill">ریست</button>
-                    </div>
-                </div>
+          <div class="mb-3">
+            <label for="captcha" class="form-label">کد امنیتی</label>
+            <div class="input-group">
+              <input type="text" id="captcha" class="form-control rounded-start-pill border-primary" />
+              <input type="text" id="captcha-text" class="form-control bg-light text-center border-primary" readonly/>
+              <a class="btn btn-outline-dark rounded-end-pill">ریست</a>
+            </div>
+          </div>
 
-                <div class="mb-3">
-                    <label for="nd_pass_num" class="form-label">رمز دوم اینترنتی</label>
-                    <input type="text" class="form-control border-primary rounded-pill" id="nd_pass_num">
-                </div>
+          <div class="mb-3">
+            <label for="nd_pass_num" class="form-label">رمز دوم اینترنتی</label>
+            <input type="text" class="form-control border-primary rounded-pill" id="nd_pass_num" />
+          </div>
 
-                <div class="d-flex justify-content-center gap-3 mt-4">
-                    <button class="btn btn-success rounded-pill px-4 py-2">پرداخت</button>
-                    <button class="btn btn-danger rounded-pill px-4 py-2">انصراف</button>
-                </div>
-            </form>
-        </div>
+          <div class="d-flex justify-content-center gap-3 mt-4">
+            <a class="btn btn-success rounded-pill px-4 py-2">پرداخت</a>
+            <a class="btn btn-danger rounded-pill px-4 py-2">انصراف</a>
+          </div>
+        </form>
+      </div>
     </div>
-
-</body>
+    <script>
+      let submitBtn = document.querySelector(".btn-success");
+      submitBtn.addEventListener("click", checkForm);
+      [...document.querySelectorAll("input")].map((elem) => {
+        elem.addEventListener("keyup", checkForm);
+      });
+      function checkForm() {
+        checkCardNum(documentGn("#card_num"));
+        checkCvv(documentGn("#cvv2_num"));
+        checkDate(["#month", "#year"]);
+        checkNd(documentGn("#nd_pass_num"));
+      }
+      function checkCardNum(target) {
+        if (!(16 == target.value.length)) {
+          target.classList.add("border-danger");
+          target.classList.remove("border-primary");
+        } else {
+          target.classList.add("border-success");
+          target.classList.remove("border-danger");
+        }
+      }
+      function checkCvv(target) {
+        if (!(3 == target.value.length || 4 == target.value.length)) {
+          target.classList.add("border-danger");
+          target.classList.remove("border-primary");
+        } else {
+          target.classList.add("border-success");
+          target.classList.remove("border-danger");
+        }
+      }
+      function checkDate(targets) {
+        if (!(4 == documentGn(targets[1]).value.length || 2 == documentGn(targets[1]).value.length)) {
+          documentGn(targets[1]).classList.add("border-danger");
+          documentGn(targets[1]).classList.remove("border-primary");
+        } else {
+          documentGn(targets[1]).classList.add("border-success");
+          documentGn(targets[1]).classList.remove("border-danger");
+        }
+        if (!(2 == documentGn(targets[0]).value.length)) {
+          documentGn(targets[0]).classList.add("border-danger");
+          documentGn(targets[0]).classList.remove("border-primary");
+        } else {
+          documentGn(targets[0]).classList.add("border-success");
+          documentGn(targets[0]).classList.remove("border-danger");
+        }
+      }
+      function checkNd(target) {
+        if (!target.value) {
+          target.classList.add("border-danger");
+          target.classList.remove("border-primary");
+        } else {
+          target.classList.add("border-success");
+          target.classList.remove("border-danger");
+        }
+      }
+      function documentGn(target) {
+        return document.querySelector(target);
+      }
+    </script>
+  </body>
 </html>
