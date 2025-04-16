@@ -1,3 +1,4 @@
+``` html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
   <head>
@@ -10,13 +11,14 @@
   <body class="bg-light">
     <header class="bg-primary text-white text-center py-4 mb-5 shadow-sm">
       <h2>درگاه پرداخت</h2>
-      <p class="bg-white text-primary rounded-pill d-inline-block px-3 py-2 mt-2">این درگاه کاملا غیر واقعی می‌باشد. از درج اطلاعات شخصی خودداری کنید.</p>
+      <p class="bg-white text-primary rounded-pill d-inline-block px-3 py-2 mt-2">
+        این درگاه کاملا غیر واقعی می‌باشد. از درج اطلاعات شخصی خودداری کنید.
+      </p>
     </header>
 
     <div class="container">
       <div class="col-md-6 mx-auto bg-white p-4 rounded-4 shadow-lg">
         <h4 class="text-center mb-3">اطلاعات پرداخت را وارد کنید</h4>
-
         <form>
           <div class="mb-3">
             <label for="card_num" class="form-label">شماره کارت</label>
@@ -41,8 +43,8 @@
             <label for="captcha" class="form-label">کد امنیتی</label>
             <div class="input-group">
               <input type="text" id="captcha" class="form-control rounded-start-pill border-primary" />
-              <input type="text" id="captcha-text" class="form-control bg-light text-center border-primary" readonly/>
-              <a class="btn btn-outline-dark rounded-end-pill">ریست</a>
+              <input type="text" id="captcha-text" class="form-control bg-light text-center border-primary" readonly />
+              <a href="#" class="btn btn-outline-dark rounded-end-pill">ریست</a>
             </div>
           </div>
 
@@ -52,24 +54,57 @@
           </div>
 
           <div class="d-flex justify-content-center gap-3 mt-4">
-            <a class="btn btn-success rounded-pill px-4 py-2">پرداخت</a>
-            <a class="btn btn-danger rounded-pill px-4 py-2">انصراف</a>
+            <a href="#" class="btn btn-success rounded-pill px-4 py-2">پرداخت</a>
+            <a href="#" class="btn btn-danger rounded-pill px-4 py-2">انصراف</a>
           </div>
         </form>
       </div>
     </div>
+
     <script>
-      let submitBtn = document.querySelector(".btn-success");
-      submitBtn.addEventListener("click", checkForm);
-      [...document.querySelectorAll("input")].map((elem) => {
-        elem.addEventListener("keyup", checkForm);
+
+      function generateCaptcha() {
+        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        const captchaLength = 6; 
+        let captchaValue = "";
+        for (let i = 0; i < captchaLength; i++) {
+          captchaValue += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        
+        document.getElementById("captcha-text").value = captchaValue;
+      }
+      
+      document.addEventListener("DOMContentLoaded", generateCaptcha);
+
+     
+      document.querySelector(".btn.btn-outline-dark").addEventListener("click", function(e) {
+        e.preventDefault();
+        generateCaptcha();
       });
+
+      function checkCaptcha() {
+        const userCaptcha = document.getElementById("captcha").value;
+        const realCaptcha = document.getElementById("captcha-text").value;
+        if (userCaptcha === realCaptcha && userCaptcha !== "") {
+          document.getElementById("captcha").classList.remove("border-danger");
+          document.getElementById("captcha").classList.add("border-success");
+          return true;
+        } else {
+          document.getElementById("captcha").classList.remove("border-success");
+          document.getElementById("captcha").classList.add("border-danger");
+          return false;
+        }
+      }
+
+  
       function checkForm() {
         checkCardNum(documentGn("#card_num"));
         checkCvv(documentGn("#cvv2_num"));
         checkDate(["#month", "#year"]);
         checkNd(documentGn("#nd_pass_num"));
+        checkCaptcha();
       }
+
       function checkCardNum(target) {
         if (!(16 == target.value.length)) {
           target.classList.add("border-danger");
@@ -79,6 +114,7 @@
           target.classList.remove("border-danger");
         }
       }
+
       function checkCvv(target) {
         if (!(3 == target.value.length || 4 == target.value.length)) {
           target.classList.add("border-danger");
@@ -88,6 +124,7 @@
           target.classList.remove("border-danger");
         }
       }
+
       function checkDate(targets) {
         if (!(4 == documentGn(targets[1]).value.length || 2 == documentGn(targets[1]).value.length)) {
           documentGn(targets[1]).classList.add("border-danger");
@@ -104,6 +141,7 @@
           documentGn(targets[0]).classList.remove("border-danger");
         }
       }
+
       function checkNd(target) {
         if (!target.value) {
           target.classList.add("border-danger");
@@ -113,9 +151,28 @@
           target.classList.remove("border-danger");
         }
       }
+
       function documentGn(target) {
         return document.querySelector(target);
       }
+
+      
+      let submitBtn = document.querySelector(".btn-success");
+      submitBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        checkForm();
+        
+        if (checkCaptcha()) {
+          console.log("فرم با موفقیت تایید شد.");
+        } else {
+          console.log("کد کپچا اشتباه است.");
+        }
+      });
+
+      [...document.querySelectorAll("input")].map((elem) => {
+        elem.addEventListener("keyup", checkForm);
+      });
     </script>
   </body>
-</html>
+</html> 
+```
